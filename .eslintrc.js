@@ -15,6 +15,11 @@ module.exports = {
   plugins: [
     'html'
   ],
+  globals: {
+    '__stack' : true,
+    '__line' : true,
+    '__function' : true
+  },
   // add your custom rules here
   'rules': {
     // allow paren-less arrow functions
@@ -22,8 +27,6 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-
-    "semi": 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
 };

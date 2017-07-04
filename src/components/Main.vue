@@ -20,7 +20,7 @@
       </v-list>
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
-        <v-list-item v-for="item in items" :key="item">
+        <v-list-item v-for="(item, index) in items" :key="item">
           <v-list-tile>
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -28,6 +28,11 @@
             <v-list-tile-content>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
             </v-list-tile-content>
+            <v-list-tile-action>
+              <v-btn icon ripple @click.native="clickLink(index)" :to="{name: 'Hello'}">
+                <v-icon>{{ item.actionIcon }}</v-icon>
+              </v-btn>
+            </v-list-tile-action>
           </v-list-tile>
         </v-list-item>
       </v-list>
@@ -38,8 +43,9 @@
     </v-toolbar>
     <main>
       <v-container fluid>
-        <div class="title">Click on sidebar to re-open.</div>
+        <!--<div class="title">Click on sidebar to re-open.</div>-->
         <!--v-router-->
+        <router-view></router-view>
       </v-container>
     </main>
   </v-app>
@@ -52,11 +58,24 @@
       return {
         drawer: true,
         items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
+          { title: 'Home', icon: 'dashboard', actionIcon: 'label_outline' },
+          { title: 'About', icon: 'question_answer', actionIcon: 'label_outline' }
         ],
         mini: false,
         right: null
+      }
+    },
+    methods: {
+      clickLink (index) {
+        let array = JSON.parse(JSON.stringify(this.items))
+        for (let i in array) {
+          if (parseInt(i) !== parseInt(index)) {
+            array[i].actionIcon = 'label_outline'
+          } else {
+            array[i].actionIcon = 'label'
+          }
+        }
+        this.items = array
       }
     }
   }

@@ -10,13 +10,13 @@
 </template>
 
 <script>
-  import MainApp from './components/Main.vue';
+  import MainApp from './components/Main.vue'
   export default {
     name: 'app',
     components: {
-      MainApps
+      MainApp
     }
-  };
+  }
 </script>
 
 <style>
